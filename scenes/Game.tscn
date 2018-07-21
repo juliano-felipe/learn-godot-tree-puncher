@@ -1,0 +1,141 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://scripts/Game.gd" type="Script" id=1]
+[ext_resource path="res://scenes/Trunk.tscn" type="PackedScene" id=2]
+[ext_resource path="res://sprites/skybox_sideHills.png" type="Texture" id=3]
+[ext_resource path="res://sprites/dirt_grass.png" type="Texture" id=4]
+[ext_resource path="res://scenes/Player.tscn" type="PackedScene" id=5]
+[ext_resource path="res://sprites/Grave.png" type="Texture" id=6]
+[ext_resource path="res://PressStart2P-Regular.ttf" type="DynamicFontData" id=7]
+
+[sub_resource type="DynamicFont" id=1]
+
+size = 50
+use_mipmaps = false
+use_filter = false
+font_data = ExtResource( 7 )
+_sections_unfolded = [ "Font", "Settings" ]
+
+[node name="Game" type="Node" index="0"]
+
+script = ExtResource( 1 )
+trunk_scene = ExtResource( 2 )
+
+[node name="Background" type="Sprite" parent="." index="0"]
+
+position = Vector2( 320, 679.089 )
+scale = Vector2( 1.83331, 2.77769 )
+z_index = -10
+texture = ExtResource( 3 )
+_sections_unfolded = [ "Transform", "Z Index" ]
+
+[node name="Ground" type="Node2D" parent="." index="1"]
+
+editor/display_folded = true
+position = Vector2( 96, 1248 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Tile" type="Sprite" parent="Ground" index="0"]
+
+scale = Vector2( 2, 2 )
+texture = ExtResource( 4 )
+_sections_unfolded = [ "Transform" ]
+
+[node name="Tile2" type="Sprite" parent="Ground" index="1"]
+
+position = Vector2( 256, 0 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 4 )
+_sections_unfolded = [ "Transform" ]
+
+[node name="Tile3" type="Sprite" parent="Ground" index="2"]
+
+position = Vector2( 512, 0 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 4 )
+_sections_unfolded = [ "Transform" ]
+
+[node name="Player" parent="." index="2" instance=ExtResource( 5 )]
+
+position = Vector2( 583.191, 900.877 )
+
+[node name="FirstTrunkPosition" type="Position2D" parent="." index="3"]
+
+position = Vector2( 360, 992 )
+_sections_unfolded = [ "Transform" ]
+
+[node name="Grave" type="Sprite" parent="." index="4"]
+
+visible = false
+position = Vector2( 584.176, 1044.72 )
+texture = ExtResource( 6 )
+
+[node name="TimeLeft" type="ProgressBar" parent="." index="5"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 37.0
+margin_top = 105.0
+margin_right = 435.0
+margin_bottom = 167.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 0
+min_value = 0.0
+max_value = 5.0
+step = 1.0
+page = 0.0
+value = 5.0
+exp_edit = false
+rounded = false
+percent_visible = false
+_sections_unfolded = [ "Percent" ]
+
+[node name="Timer" type="Timer" parent="." index="6"]
+
+process_mode = 1
+wait_time = 2.5
+one_shot = false
+autostart = false
+
+[node name="Score" type="RichTextLabel" parent="." index="7"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 525.0
+margin_top = 105.0
+margin_right = 700.0
+margin_bottom = 163.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = true
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+custom_fonts/normal_font = SubResource( 1 )
+custom_colors/default_color = Color( 0, 0, 0, 1 )
+bbcode_enabled = false
+bbcode_text = ""
+visible_characters = -1
+percent_visible = 1.0
+meta_underlined = true
+tab_size = 4
+text = ""
+scroll_active = false
+scroll_following = false
+selection_enabled = false
+override_selected_font_color = false
+_sections_unfolded = [ "BBCode", "Rect" ]
+
+[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
+
+
